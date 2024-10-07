@@ -9,6 +9,9 @@ const userSchema = new mongoose.Schema({
     email: {type: String, required: true, unique: true},
     firstName: {type: String, required: true},
     lastName: {type: String, required: true},
+    admin: {type: boolean, default: false},
+    product: {type: mongoose.Schema.Types.ObjectId, ref: 'Product'},
+    cart: [{type: mongoose.Schema.Types.ObjectId, ref: 'Cart'}]
 }, {
     timestamps: true
 }) 
