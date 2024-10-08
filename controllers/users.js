@@ -43,3 +43,23 @@ exports.loginUser = async (req, res) => {
         res.status(400).json({ message: error.message})
     }
 }
+
+exports.updateUser = async (req, res) => {
+    try {
+        const updates = Object.keys(req.body)
+        updates.forEach(update => req.user[update] = req.body[update])
+        await req.user.save()
+        res.json(user)
+    } catch (error) {
+        res.status(400).json({message: error.message })
+    }
+}
+
+exports.deleteUser = async (req, res) => {
+    try {
+        await req.user.deleteOne()
+        res.sendStatus(204)
+    } catch (error) {
+        
+    }
+}
