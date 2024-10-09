@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
     password: {type: String, required: true},
     firstName: {type: String, required: true},
     lastName: {type: String, required: true},
-    admin: {type: boolean, default: false},
+    admin: {type: Boolean, default: false},
     cart: [{type: mongoose.Schema.Types.ObjectId, ref: 'Cart'}]
 }, {
     timestamps: true
@@ -23,8 +23,8 @@ userSchema.pre('save', async function(next){
 })
 
 userSchema.methods.generateAuthToken = async function() {
-    const token = jwt.sign({_id: this._id }, process.env.Secret)
-    return Token
+    const token = jwt.sign({_id: this._id }, process.env.SECRET)
+    return token
 }
 
 const User = mongoose.model('User', userSchema)

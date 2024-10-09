@@ -1,8 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const cartController = require('../controllers/carts')
-const userController = require('../controllers/user')
-const { auth } = userController
+const cartController = require('../controllers/carts.js')
+const { auth } = require('../controllers/users.js')
 
 // Get cart 
 router.get('/:id', auth, cartController.getUserCart)

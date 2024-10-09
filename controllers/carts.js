@@ -1,6 +1,6 @@
 const Cart = require('../models/cart')
 const Product = require('../models/product')
-const {auth} = require('../controllers/user')
+const {auth} = require('../controllers/users')
 
 const getUserCart = async (req, res) => {
     try {

@@ -1,13 +1,12 @@
 const express = require ('express')
 const router = express.Router()
-const userController = require('..controllers/user.js')
 const productController = require('../controllers/products.js')
-const { auth } = userController
+const { auth } = require('../controllers/users.js')
 
 //Public
 router.get('/', productController.getAllProducts)
 //Public get product by id 
-router.get('/:id', productController.getProductById)
+router.get('/:id', productController.getProductId)
 // Create new product (Admin only)
 router.post('/', auth, productController.createProduct);
 // Update product (Admin only)

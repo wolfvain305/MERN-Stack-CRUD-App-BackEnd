@@ -7,5 +7,5 @@ mongoose.connect(process.env.MONGO_URI)
 mongoose.connection.once('open', () => console.log ('Mongo is live'))
 
 app.listen(PORT, () => {
-    console.log.log('We are live on ${PORT}')
+    console.log('We are live on ${PORT}')
 })

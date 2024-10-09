@@ -11,4 +11,4 @@ app.use('/users', userRoutes)
 app.use('/carts', cartRoutes)
 app.use('/products', productRoutes)
 
-module.export = app
+module.exports = app
