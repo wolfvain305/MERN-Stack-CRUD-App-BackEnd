@@ -49,7 +49,7 @@ const updateProduct = async (req, res) => {
 
         const updatedProduct = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true })
         if (!updatedProduct) {
-            return res.status(40r).json({ message: "Product not found"})
+            return res.status(404).json({ message: "Product not found"})
         }
         res.status(200).json(updateProduct)
     } catch (error) {
