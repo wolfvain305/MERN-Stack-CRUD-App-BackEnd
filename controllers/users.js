@@ -26,7 +26,11 @@ exports.createUser = async (req, res) => {
         const token = await user.generateAuthToken()
         res.json({user, token })
     } catch (error) {
-        res.status(400).json({ message: error.message})
+        if (error.code === 11000 && error.keyPattern.username) {
+            res.status(400).json({ message: 'Username already exists. Please Choose a different one!'})
+        } else {
+            res.status(400).json({ message: error.message})
+        }
     }
 }
 
