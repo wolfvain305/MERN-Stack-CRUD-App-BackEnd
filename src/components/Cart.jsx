@@ -2,45 +2,46 @@ import React, { useEffect, useState } from 'react';
 import axiosInstance from '../Authentication/axioxInstance';
 import { useAuth } from '../Authentication/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import '../styles/Cart.css'
 
 const Cart = () => {
-    const [cart, setCart] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const { user } = useAuth(); // Accessing the authenticated user context
-    const navigate = useNavigate();
+    const [cart, setCart] = useState([])
+    const [loading, setLoading] = useState(true)
+    const { user } = useAuth()
+    const navigate = useNavigate()
 
-    // Fetching the user's cart from the backend
+   
     useEffect(() => {
         const fetchCart = async () => {
             if (!user) {
-                navigate('/login'); // Redirect to login if not authenticated
-                return;
+                navigate('/login')
+                return
             }
 
             try {
-                const response = await axiosInstance.get(`/users/${user._id}/cart`);
-                setCart(response.data); // Assuming the response data contains the cart items
+                const {response} = await axiosInstance.get('/carts')
+                setCart(response.data) 
             } catch (error) {
-                console.error('Error fetching cart:', error);
+                console.error('Error fetching cart:', error)
             } finally {
-                setLoading(false);
+                setLoading(false)
             }
         };
 
         fetchCart();
-    }, [user, navigate]);
+    }, [user, navigate])
 
     const handleRemoveFromCart = async (productId) => {
         try {
-            await axiosInstance.delete(`/cart/${productId}`); // Assuming your API has this endpoint
-            setCart(cart.filter(item => item.product._id !== productId)); // Update local cart state
+            await axiosInstance.delete(`/cart/remove/${productId}`) 
+            setCart(cart.filter(item => item.product._id !== productId))
         } catch (error) {
-            console.error('Error removing item from cart:', error);
+            console.error('Error removing item from cart:', error)
         }
     };
 
     if (loading) {
-        return <div>Loading...</div>; // Show loading state while fetching
+        return <div>Loading...</div>
     }
 
     return (
@@ -52,16 +53,18 @@ const Cart = () => {
                     <button onClick={() => navigate('/ProductList')}>View Our Products</button>
                 </div>
             ) : (
-                <ul>
+                <div className="cart-container">
                     {cart.map((item) => (
-                        <li key={item.product._id}>
-                            <h3>{item.product.name}</h3>
-                            <p>Price: ${item.product.price}</p>
-                            <p>Quantity: {item.quantity}</p>
-                            <button onClick={() => handleRemoveFromCart(item.product._id)}>Remove</button>
-                        </li>
+                        <div className="cart-card" key={item.product._id}>
+                            <div className="cart-card-content">
+                                <h3 className="cart-card-title">{item.product.name}</h3>
+                                <p className="cart-card-price">Price: ${item.product.price}</p>
+                                <p className="cart-card-quantity">Quantity: {item.quantity}</p>
+                                <button onClick={() => handleRemoveFromCart(item.product._id)} className="remove-button">Remove</button>
+                            </div>
+                        </div>
                     ))}
-                </ul>
+                </div>
             )}
         </div>
     );

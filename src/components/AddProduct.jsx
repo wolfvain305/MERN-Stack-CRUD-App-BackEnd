@@ -3,8 +3,6 @@ import axiosInstance from "../Authentication/axioxInstance";
 import { useNavigate } from "react-router-dom";
 import '../styles/AddProductForm.css'
 
-//Admin only
-
 const AddProduct = () => {
     const [productData, setProductData] = useState ({
         name: '',
