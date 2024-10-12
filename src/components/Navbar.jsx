@@ -1,10 +1,20 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../Authentication/AuthContext'
 import '../styles/NavBar.css'
 
 const NavBar = () => {
     const { user, logout } = useAuth()
+    const navigate = useNavigate()
+
+    const handleLogout = async () => {
+        try{
+            await logout()
+            navigate('/')
+        } catch (error) {
+            console.error('Logout failed:', error)
+        }
+    }
 
     return (
         <nav className='navbar'>
@@ -24,12 +34,12 @@ const NavBar = () => {
 
                     {user && (
                         <>
-                            <li><Link to="/profile">Profile</Link></li>
                             <li><Link to="/cart">Cart</Link></li>
-                            <li><button onClick={logout}>Logout</button></li>
                             {user.admin && (
                                 <li><Link to="/add-product">Add Product</Link></li>
                             )}
+                            <li><Link to="/profile">Profile</Link></li>
+                            <li><button className='logout-button' onClick={handleLogout}>Logout</button></li>
                         </>
                     )}
                 </ul>

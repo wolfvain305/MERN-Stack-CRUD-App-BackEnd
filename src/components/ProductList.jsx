@@ -1,8 +1,11 @@
 import React, {useEffect, useState} from "react";
 import axiosInstance from "../Authentication/axioxInstance";
+import { useAuth } from "../Authentication/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const ProductList = () => {
     const [products, setProducts] = useState([])
+    
 
     useEffect(() => {
         const fetchProducts = async () => {

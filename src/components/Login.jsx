@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useAuth } from '../Authentication/AuthContext'
 import { useNavigate } from 'react-router-dom'
-import '../styles/Login.css'
+import '../styles/AuthForm.css'
 
 const Login = () => {
     const [username, setUsername] = useState('')
@@ -20,20 +20,18 @@ const Login = () => {
     }
 
     return (
-        <div className="login-container">
-            <h2 className="login-title">Login</h2>
-            <form className="login-form" onSubmit={handleSubmit}>
-                <div className="form-group">
+        <form className="auth-form" onSubmit={handleSubmit}>
+                <h2 className="login-title">Login:</h2>
+                <div className="input-group">
                     <label>Username:</label>
                     <input value={username} onChange={(e) => setUsername(e.target.value)} required />
                 </div>
-                <div className="form-group">
-                <label>Password:</label>
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                <div className="input-group">
+                    <label>Password:</label>
+                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                 </div>
-                <button type="submit" className="login-button">Login</button>
+                <button type="submit" className="auth-button">Login</button>
             </form>
-        </div>
     )
 }
 
