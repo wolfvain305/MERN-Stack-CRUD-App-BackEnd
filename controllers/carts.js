@@ -13,7 +13,6 @@ const getUserCart = async (req, res) => {
         res.status(500).json({ message: error.message })
     }
 }
-
 const createCart = async (req,res) => {
     try {
         const cart = new Cart()
@@ -25,6 +24,7 @@ const createCart = async (req,res) => {
         res.status(400).json({ message: error.message })
     }
 }
+
 
 const addProductToCart = async (req, res) => {
     const { productId, quantity } = req.body
@@ -43,7 +43,7 @@ const addProductToCart = async (req, res) => {
 
         const itemIndex = cart.items.findIndex(item => item.product.toString() === productId)
         if (itemIndex > -1) {
-            cart.items[itemIndex].quantity =+ quantity
+            cart.items[itemIndex].quantity += quantity
         } else {
             cart.items.push({ product: productId, quantity })
         }

@@ -24,6 +24,8 @@ const getProductId = async (req,res) => {
     }
 }
 
+
+
 // Admin only below
 
 const createProduct = async (req, res) => {
