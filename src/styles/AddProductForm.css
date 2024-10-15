@@ -40,8 +40,11 @@
   }
 
   .add-product-button button {
-    display: flex;
-    padding: 20px auto 0 auto;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
   }
   
   .add-product-button:hover {

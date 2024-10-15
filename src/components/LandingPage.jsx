@@ -1,7 +1,9 @@
 import React from "react";
 import '../styles/LandingPage.css'
+import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
+    const navigate = useNavigate()
     return (
         <div className="landing-page">
             <header className="header">
@@ -11,9 +13,9 @@ const LandingPage = () => {
 
             <nav className="nav">
                 <ul>
-                    <li>Products</li>
-                    <li>Pastries</li>
-                    <li>Cakes</li>
+                    <li onClick={() => navigate('/ProductList')}>Products</li>
+                    <li onClick={() => navigate('/ProductList?category=Pastrey')}>Pastries</li>
+                    <li onClick={() => navigate('/ProductList?category=Cake')}>Cakes</li>
                 </ul>
             </nav>
 

@@ -20,6 +20,12 @@ const ProductList = () => {
             
                 const uniqueCategories = [...new Set(data.map(product => product.category))]
                 setCategories(uniqueCategories)
+
+                const queryParams = new URLSearchParams(location.search)
+                const category= queryParams.get('category')
+                if (category) {
+                    setSelectedCategory(category)
+                }
             } catch (error) {
                 console.error('Error fetching products:', error)
             }
@@ -35,7 +41,7 @@ const ProductList = () => {
         }
 
         try {
-            await axiosInstance.post(`/carts`, { productId: product._id, quantity: 1 })
+            await axiosInstance.post(`/carts/add`, { productId: product._id, quantity: 1 })
             alert(`${product.name} has been added to your cart.`);
         } catch (error) {
             console.error('Error adding to cart:', error)
