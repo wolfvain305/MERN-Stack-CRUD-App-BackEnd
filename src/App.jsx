@@ -9,6 +9,7 @@ import Cart from './components/Cart';
 import LandingPage from './components/LandingPage';
 import Profile from './components/Profile';
 import Layout from './components/Layout';
+import EditProduct from './components/EditProducts';
 
 const App = () => {
     return (
@@ -22,7 +23,8 @@ const App = () => {
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/cart" element={<Cart />} />
-                    <Route path="/add-product" element={<AddProduct />} />                     
+                    <Route path="/add-product" element={<AddProduct />} />      
+                    <Route path='/EditProduct' element={<EditProduct/>} />               
                         </Route>
                 </Routes>
             </Router>

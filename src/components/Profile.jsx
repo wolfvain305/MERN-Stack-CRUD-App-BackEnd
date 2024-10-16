@@ -76,6 +76,13 @@ const Profile = () => {
           </div>
       </div>
 
+      {user && user.admin &&  (
+        <div className='admin-section'>
+        <h3>Admin Panel</h3>
+        <button className='admin-button' onClick={() => navigate('/EditProduct')}>Edit Products</button>
+        </div>
+      )}
+
       {showPopup && (
           <div className="popup">
               <div className="popup-content">
