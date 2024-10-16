@@ -6,25 +6,18 @@ const getUserCart = async (req, res) => {
     try {
         const cart = await Cart.findById(req.user.cart).populate('items.product')
         if(!cart) {
-            return res.status(404).json({ message: "Cart not found"})
+            const cart = new Cart()
+            const savedCart = await cart.save()
+            req.user.cart = savedCart._id
+            await req.user.save()
+            return res.status(201).json(savedCart)
+            // return res.status(404).json({ message: "Cart not found"})
         }
-        res.status(200).json(cart)
+        return res.status(200).json(cart)
     } catch (error) {
-        res.status(500).json({ message: error.message })
+        return res.status(500).json({ message: error.message })
     }
 }
-const createCart = async (req,res) => {
-    try {
-        const cart = new Cart()
-        const savedCart = await cart.save()
-        req.user.cart = savedCart._id
-        await req.user.save()
-        res.status(201).json(savedCart)
-    } catch (error) {
-        res.status(400).json({ message: error.message })
-    }
-}
-
 
 const addProductToCart = async (req, res) => {
     const { productId, quantity } = req.body
@@ -89,7 +82,7 @@ const clearCart = async (req, res) => {
 
 module.exports = {
     getUserCart,
-    createCart,
+    // createCart,
     addProductToCart,
     removeProductFromCart,
     clearCart

@@ -5,10 +5,10 @@ const { auth } = require('../controllers/users.js')
 
 
 // Get cart 
-router.get('/cart', auth, cartController.getUserCart)
+router.get('/', auth, cartController.getUserCart)
 
 // Create a new cart for the user 
-router.post('/', auth, cartController.createCart)
+// router.post('/', auth, cartController.createCart)
 
 // Add product to cart 
 router.post('/add', auth, cartController.addProductToCart)
